@@ -16,7 +16,7 @@ public class StringCalculator {
             if (delimiter.isDefault()) {
                 split = inputString.split(delimiter.getDelimiter());
             } else {
-                split = inputString.substring(4).split(delimiter.getDelimiter());
+                split = inputString.split("\n")[1].split(delimiter.getDelimiter());
             }
             List<Integer> unsupportedNumbers = new ArrayList<Integer>();
             for (String stringNumber : split) {
@@ -28,7 +28,8 @@ public class StringCalculator {
                 }
             }
             if (unsupportedNumbers.size() > 0) {
-                throw new UnsupportedNumberException(UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, unsupportedNumbers);
+                throw new UnsupportedNumberException(
+                        UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, unsupportedNumbers);
             }
         }
         return result;
@@ -37,7 +38,9 @@ public class StringCalculator {
     private Delimiter resolveDelimiter(String inputString) {
         Delimiter delimiter;
         if (inputString.length() > 4 && inputString.startsWith("//")) {
-            delimiter = Delimiter.getDelimiterFor(inputString.substring(2, 3));
+            delimiter =
+                    Delimiter.getDelimiterFor(
+                            inputString.split("\n")[0].substring(2).replace("[", "").replaceAll("]", ""));
         } else {
             delimiter = Delimiter.getDefaultDelimiter();
         }

@@ -15,7 +15,19 @@ public class Delimiter {
     }
 
     public static Delimiter getDelimiterFor(String delimiter) {
-        return new Delimiter(delimiter, false);
+        return new Delimiter(getConvertedDelimiter(delimiter), false);
+    }
+
+    private static String getConvertedDelimiter(String delimiter) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (char c : delimiter.toCharArray()) {
+            if (c == '*') {
+                stringBuilder.append("\\*");
+            } else {
+                stringBuilder.append(c);
+            }
+        }
+        return stringBuilder.toString();
     }
 
     public String getDelimiter() {
