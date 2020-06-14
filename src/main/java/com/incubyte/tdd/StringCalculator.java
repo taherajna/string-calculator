@@ -5,7 +5,10 @@ import java.util.List;
 
 public class StringCalculator {
 
+    private int calledCount = 0;
+
     public int add(String inputString) throws UnsupportedNumberException {
+        calledCount++;
         int result = 0;
         if (inputString.length() > 0) {
             Delimiter delimiter = resolveDelimiter(inputString);
@@ -42,6 +45,6 @@ public class StringCalculator {
     }
 
     public int getCalledCount() {
-        return 0;
+        return calledCount;
     }
 }
