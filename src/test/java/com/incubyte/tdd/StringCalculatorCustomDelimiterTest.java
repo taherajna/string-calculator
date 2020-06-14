@@ -24,4 +24,9 @@ public class StringCalculatorCustomDelimiterTest {
     Assert.assertEquals(3, stringCalculator.add("//[**]\n1**2"));
     Assert.assertEquals(24 + 72, stringCalculator.add("//[***]\n24***72"));
   }
+
+  @Test
+  public void testFor_CustomMutipleDelimiters() throws UnsupportedNumberException {
+    Assert.assertEquals(6, stringCalculator.add("//[*][%]\n1*2%3"));
+  }
 }
