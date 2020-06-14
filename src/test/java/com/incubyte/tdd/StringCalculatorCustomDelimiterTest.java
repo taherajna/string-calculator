@@ -29,4 +29,10 @@ public class StringCalculatorCustomDelimiterTest {
   public void testFor_CustomMutipleDelimiters() throws UnsupportedNumberException {
     Assert.assertEquals(6, stringCalculator.add("//[*][%]\n1*2%3"));
   }
+
+  @Test
+  public void testFor_CustomMutipleDelimiters_variedLengths() throws UnsupportedNumberException {
+    Assert.assertEquals(6, stringCalculator.add("//[**][%%]\n1**2%%3"));
+    Assert.assertEquals(10, stringCalculator.add("//[**][%%][/]\n1**2%%3/4"));
+  }
 }
