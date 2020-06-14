@@ -22,4 +22,11 @@ public class StringCalculatorTest {
     public void testAddForEmptyString() {
         Assert.assertEquals(0, stringCalculator.add(""));
     }
+
+    @Test
+    public void testAddForSingleDigit() {
+        Assert.assertEquals(1, stringCalculator.add("1"));
+        Assert.assertEquals(10, stringCalculator.add("10"));
+    }
+
 }
