@@ -6,20 +6,20 @@ import org.junit.Test;
 
 public class StringCalculatorGetCalledCountTest {
 
-    private StringCalculator stringCalculator;
+  private StringCalculator stringCalculator;
 
-    @Before
-    public void setUp() {
-        stringCalculator = new StringCalculator();
-    }
+  @Before
+  public void setUp() {
+    stringCalculator = new StringCalculator();
+  }
 
-    @Test
-    public void testGetCalledCount() throws UnsupportedNumberException {
-        stringCalculator.add("");
-        stringCalculator.add("");
-        stringCalculator.add("");
-        stringCalculator.add("");
+  @Test
+  public void testGetCalledCount() throws UnsupportedNumberException {
+    stringCalculator.add("");
+    stringCalculator.add("");
+    stringCalculator.add("");
+    stringCalculator.add("");
 
-        Assert.assertEquals(4, stringCalculator.getCalledCount());
-    }
+    Assert.assertEquals(4, stringCalculator.getCalledCount());
+  }
 }
