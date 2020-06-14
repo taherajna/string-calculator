@@ -17,4 +17,9 @@ public class StringCalculatorSpecialCharactersTest {
     public void testAddFor_NewLineCharacters() {
         Assert.assertEquals(3, stringCalculator.add("1\n2"));
     }
+
+    @Test
+    public void testAddFor_NewLineCharactersAndComma() {
+        Assert.assertEquals(6, stringCalculator.add("1\n2,3"));
+    }
 }
