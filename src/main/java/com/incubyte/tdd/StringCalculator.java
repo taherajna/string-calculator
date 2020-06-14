@@ -2,7 +2,7 @@ package com.incubyte.tdd;
 
 public class StringCalculator {
 
-    public int add(String inputString) {
+    public int add(String inputString) throws UnsupportedNumberException {
         int result = 0;
         if (inputString.length() > 0) {
             Delimiter delimiter = resolveDelimiter(inputString);
@@ -12,8 +12,12 @@ public class StringCalculator {
             } else {
                 split = inputString.substring(4).split(delimiter.getDelimiter());
             }
-            for (String number : split) {
-                result += Integer.parseInt(number);
+            for (String stringNumber : split) {
+                int intNumber = Integer.parseInt(stringNumber);
+                if (intNumber < 0) {
+                    throw new UnsupportedNumberException(UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, intNumber);
+                }
+                result += intNumber;
             }
         }
         return result;

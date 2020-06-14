@@ -13,7 +13,7 @@ public class StringCalculatorCustomDelimiterTest {
     }
 
     @Test
-    public void testForDelimiterProvidedToAdd() {
+    public void testForDelimiterProvidedToAdd() throws UnsupportedNumberException {
         Assert.assertEquals(3, stringCalculator.add("//;\n1;2"));
         Assert.assertEquals(3, stringCalculator.add("//,\n1,2"));
         Assert.assertEquals(24+72, stringCalculator.add("///\n24/72"));

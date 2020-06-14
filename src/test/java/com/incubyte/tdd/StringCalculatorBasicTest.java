@@ -19,25 +19,25 @@ public class StringCalculatorBasicTest {
     }
 
     @Test
-    public void testAddForEmptyString() {
+    public void testAddForEmptyString() throws UnsupportedNumberException {
         Assert.assertEquals(0, stringCalculator.add(""));
     }
 
     @Test
-    public void testAddForSingleNumber() {
+    public void testAddForSingleNumber() throws UnsupportedNumberException {
         Assert.assertEquals(1, stringCalculator.add("1"));
         Assert.assertEquals(10, stringCalculator.add("10"));
     }
 
     @Test
-    public void testAddForTwoNumbers() {
+    public void testAddForTwoNumbers() throws UnsupportedNumberException {
         Assert.assertEquals(3, stringCalculator.add("1,2"));
         Assert.assertEquals(12 + 34, stringCalculator.add("12,34"));
     }
 
 
     @Test
-    public void testAddFor_AnyAmountOfCommaSeparatedNumbers() {
+    public void testAddFor_AnyAmountOfCommaSeparatedNumbers() throws UnsupportedNumberException {
         Assert.assertEquals(1 + 2 + 3 + 4 + 5, stringCalculator.add("1,2,3,4,5"));
         Assert.assertEquals(12 + 34 + 72 + 88, stringCalculator.add("12,34,72,88"));
     }
