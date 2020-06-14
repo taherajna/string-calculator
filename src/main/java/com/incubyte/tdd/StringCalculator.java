@@ -4,8 +4,11 @@ public class StringCalculator {
 
     public int add(String inputString) {
         int result = 0;
-        if (inputString.length() > 0) {
-            result = Integer.parseInt(inputString);
+        String[] split = inputString.split(",");
+        for (String number : split) {
+            if (number.length() > 0) {
+                result += Integer.parseInt(number);
+            }
         }
         return result;
     }

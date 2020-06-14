@@ -24,9 +24,15 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void testAddForSingleDigit() {
+    public void testAddForSingleNumber() {
         Assert.assertEquals(1, stringCalculator.add("1"));
         Assert.assertEquals(10, stringCalculator.add("10"));
+    }
+
+    @Test
+    public void testAddForTwoNumbers() {
+        Assert.assertEquals(3, stringCalculator.add("1,2"));
+        Assert.assertEquals(12+34, stringCalculator.add("12,34"));
     }
 
 }
