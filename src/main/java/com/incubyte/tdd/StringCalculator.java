@@ -23,7 +23,7 @@ public class StringCalculator {
                 int intNumber = Integer.parseInt(stringNumber);
                 if (intNumber < 0) {
                     unsupportedNumbers.add(intNumber);
-                } else {
+                } else if (intNumber <= 1000) {
                     result += intNumber;
                 }
             }

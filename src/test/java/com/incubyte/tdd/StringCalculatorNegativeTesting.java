@@ -40,4 +40,9 @@ public class StringCalculatorNegativeTesting {
             Assert.assertEquals("Negatives not allowed: [-4, -1, -65]", e.getMessage());
         }
     }
+
+    @Test
+    public void testAdd_NumbersGreatedThan1000AreIgnored() throws UnsupportedNumberException {
+        Assert.assertEquals(1000 + 10 + 20, stringCalculator.add("10\n20,1001,1000"));
+    }
 }
