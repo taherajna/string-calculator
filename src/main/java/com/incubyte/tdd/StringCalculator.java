@@ -1,6 +1,7 @@
 package com.incubyte.tdd;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringCalculator {
@@ -11,13 +12,8 @@ public class StringCalculator {
     calledCount++;
     int result = 0;
     if (inputString.length() > 0) {
-      List<Delimiter> delimiter = resolveDelimiter(inputString);
-      String[] split;
-      if (delimiter.isEmpty()) {
-        split = inputString.split(Delimiter.getDefaultDelimiter().getDelimiter());
-      } else {
-        split = getSplittedString(inputString, delimiter);
-      }
+      List<Delimiter> delimiters = resolveDelimiters(inputString);
+      String[] split = getSplittedString(inputString, delimiters);
       List<Integer> unsupportedNumbers = new ArrayList<Integer>();
       for (String stringNumber : split) {
         int intNumber = Integer.parseInt(stringNumber);
@@ -36,21 +32,40 @@ public class StringCalculator {
   }
 
   private String[] getSplittedString(String inputString, List<Delimiter> delimiters) {
-    StringBuilder delimiterBuilder = new StringBuilder();
-    for (Delimiter delimiter : delimiters) {
-      delimiterBuilder.append(delimiter.getDelimiter());
+    String[] splitStringsArray;
+    List<String> splitStrings = new ArrayList<String>();
+    if (delimiters.isEmpty()) {
+      splitStringsArray = inputString.split(Delimiter.getDefaultDelimiter().getDelimiter());
+    } else {
+      for (Delimiter delimiter : delimiters) {
+        if (splitStrings.isEmpty()) {
+          splitStrings.addAll(
+                  Arrays.asList(inputString.split("\n")[1].split(delimiter.getDelimiter())));
+        } else {
+          for (int i = 0; i < splitStrings.size(); i++) {
+            String[] subSplit = splitStrings.get(i).split(delimiter.getDelimiter());
+            if (subSplit.length > 1) {
+              splitStrings.remove(i);
+              splitStrings.addAll(Arrays.asList(subSplit));
+            }
+          }
+        }
+      }
+      splitStringsArray = splitStrings.toArray(new String[0]);
     }
-    return inputString.split("\n")[1].split(delimiterBuilder.toString());
+    return splitStringsArray;
   }
 
-  private List<Delimiter> resolveDelimiter(String inputString) {
-    List<Delimiter> delimiter = new ArrayList<Delimiter>();
+  private List<Delimiter> resolveDelimiters(String inputString) {
+    List<Delimiter> delimiters = new ArrayList<Delimiter>();
     if (inputString.length() > 4 && inputString.startsWith("//")) {
-      delimiter.add(
-              Delimiter.getDelimiterFor(
-                      inputString.split("\n")[0].substring(2).replace("[", "").replaceAll("]", "")));
+      String[] delimitersSplit = inputString.split("\n")[0].substring(2).split("\\]\\[");
+      for (String delimiterString : delimitersSplit) {
+        delimiters.add(
+                Delimiter.getDelimiterFor(delimiterString.replace("[", "").replaceAll("]", "")));
+      }
     }
-    return delimiter;
+    return delimiters;
   }
 
   public int getCalledCount() {
