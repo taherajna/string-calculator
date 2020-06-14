@@ -5,49 +5,49 @@ import java.util.List;
 
 public class StringCalculator {
 
-    private int calledCount = 0;
+  private int calledCount = 0;
 
-    public int add(String inputString) throws UnsupportedNumberException {
-        calledCount++;
-        int result = 0;
-        if (inputString.length() > 0) {
-            Delimiter delimiter = resolveDelimiter(inputString);
-            String[] split;
-            if (delimiter.isDefault()) {
-                split = inputString.split(delimiter.getDelimiter());
-            } else {
-                split = inputString.split("\n")[1].split(delimiter.getDelimiter());
-            }
-            List<Integer> unsupportedNumbers = new ArrayList<Integer>();
-            for (String stringNumber : split) {
-                int intNumber = Integer.parseInt(stringNumber);
-                if (intNumber < 0) {
-                    unsupportedNumbers.add(intNumber);
-                } else if (intNumber <= 1000) {
-                    result += intNumber;
-                }
-            }
-            if (unsupportedNumbers.size() > 0) {
-                throw new UnsupportedNumberException(
-                        UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, unsupportedNumbers);
-            }
+  public int add(String inputString) throws UnsupportedNumberException {
+    calledCount++;
+    int result = 0;
+    if (inputString.length() > 0) {
+      Delimiter delimiter = resolveDelimiter(inputString);
+      String[] split;
+      if (delimiter.isDefault()) {
+        split = inputString.split(delimiter.getDelimiter());
+      } else {
+        split = inputString.split("\n")[1].split(delimiter.getDelimiter());
+      }
+      List<Integer> unsupportedNumbers = new ArrayList<Integer>();
+      for (String stringNumber : split) {
+        int intNumber = Integer.parseInt(stringNumber);
+        if (intNumber < 0) {
+          unsupportedNumbers.add(intNumber);
+        } else if (intNumber <= 1000) {
+          result += intNumber;
         }
-        return result;
+      }
+      if (unsupportedNumbers.size() > 0) {
+        throw new UnsupportedNumberException(
+                UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, unsupportedNumbers);
+      }
     }
+    return result;
+  }
 
-    private Delimiter resolveDelimiter(String inputString) {
-        Delimiter delimiter;
-        if (inputString.length() > 4 && inputString.startsWith("//")) {
-            delimiter =
-                    Delimiter.getDelimiterFor(
-                            inputString.split("\n")[0].substring(2).replace("[", "").replaceAll("]", ""));
-        } else {
-            delimiter = Delimiter.getDefaultDelimiter();
-        }
-        return delimiter;
+  private Delimiter resolveDelimiter(String inputString) {
+    Delimiter delimiter;
+    if (inputString.length() > 4 && inputString.startsWith("//")) {
+      delimiter =
+              Delimiter.getDelimiterFor(
+                      inputString.split("\n")[0].substring(2).replace("[", "").replaceAll("]", ""));
+    } else {
+      delimiter = Delimiter.getDefaultDelimiter();
     }
+    return delimiter;
+  }
 
-    public int getCalledCount() {
-        return calledCount;
-    }
+  public int getCalledCount() {
+    return calledCount;
+  }
 }

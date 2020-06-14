@@ -19,7 +19,8 @@ public class StringCalculatorNegativeTesting {
     }
 
     @Test(expected = UnsupportedNumberException.class)
-    public void testAddForNegativeAndPositiveNumbers_expectException() throws UnsupportedNumberException {
+    public void testAddForNegativeAndPositiveNumbers_expectException()
+            throws UnsupportedNumberException {
         stringCalculator.add("4,-1");
     }
 
