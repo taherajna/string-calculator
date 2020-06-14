@@ -28,7 +28,16 @@ public class StringCalculatorNegativeTesting {
         try {
             stringCalculator.add("4,-1");
         } catch (UnsupportedNumberException e) {
-            Assert.assertEquals("Negatives not allowed: " + -1, e.getMessage());
+            Assert.assertEquals("Negatives not allowed: [-1]", e.getMessage());
+        }
+    }
+
+    @Test
+    public void testAddForMultipleNegativeNumbers_assertErrorMessage() {
+        try {
+            stringCalculator.add("-4,-1,-65");
+        } catch (UnsupportedNumberException e) {
+            Assert.assertEquals("Negatives not allowed: [-4, -1, -65]", e.getMessage());
         }
     }
 }

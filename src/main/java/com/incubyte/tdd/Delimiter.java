@@ -1,10 +1,9 @@
 package com.incubyte.tdd;
 
 public class Delimiter {
+    private static final Delimiter defaultDelimiter = new Delimiter("[\n,]", true);
     private String delimiter;
     private boolean isDefault;
-
-    private static final Delimiter defaultDelimiter = new Delimiter("[\n,]", true);
 
     private Delimiter(String delimiter, boolean isDefault) {
         this.delimiter = delimiter;

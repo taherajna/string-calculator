@@ -1,5 +1,8 @@
 package com.incubyte.tdd;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class StringCalculator {
 
     public int add(String inputString) throws UnsupportedNumberException {
@@ -12,12 +15,17 @@ public class StringCalculator {
             } else {
                 split = inputString.substring(4).split(delimiter.getDelimiter());
             }
+            List<Integer> unsupportedNumbers = new ArrayList<Integer>();
             for (String stringNumber : split) {
                 int intNumber = Integer.parseInt(stringNumber);
                 if (intNumber < 0) {
-                    throw new UnsupportedNumberException(UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, intNumber);
+                    unsupportedNumbers.add(intNumber);
+                } else {
+                    result += intNumber;
                 }
-                result += intNumber;
+            }
+            if (unsupportedNumbers.size() > 0) {
+                throw new UnsupportedNumberException(UnsupportedNumberException.NEGATIVES_NOT_ALLOWED, unsupportedNumbers);
             }
         }
         return result;
